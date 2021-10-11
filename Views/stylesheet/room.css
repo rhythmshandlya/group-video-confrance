@@ -14,8 +14,9 @@ body {
 .container {
   display: flex;
 }
-.room-grid {
-  flex-basis: 75%;
+
+#room-grid {
+  flex-basis: 90%;
 }
 .chat-box {
   display: flex;
@@ -59,4 +60,13 @@ input[type='text'] {
 .center {
   color: royalblue;
   text-align: center;
+}
+#room-grid {
+  display: flex;
+}
+#room-grid video {
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  height: 200px;
+  width: 200px;
 }
