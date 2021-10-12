@@ -48,7 +48,7 @@ navigator.mediaDevices
       console.log('New user connected ', new_user_id);
 
       //Connect Video
-      connectToNewUser(new_user_id, stream);
+      setTimeout(connectToNewUser, 5000, new_user_id, stream);
 
       //Display message in chat
       const newP = document.createElement('p');

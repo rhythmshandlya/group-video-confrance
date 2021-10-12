@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rooms</title>
+    <link rel="stylesheet" href="/stylesheet/test.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.0.2/bootstrap-material-design.css"
+    />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/script/test.js"></script>
+  </head>
+  <body>
+    <!--Content of the page-->
+    <div id="room-content">
+      <nav>
+        <h1>ROOMS</h1>
+        <i class="material-icons mic noselect" id="mic"> mic </i>
+      </nav>
+    </div>
+    <!-- Fixed chat-box -->
+    <div id="my-chat-box">
+      <div id="chat-circle" class="btn btn-raised">
+        <div id="chat-overlay"></div>
+        <i class="material-icons" id="open-chat-btn">speaker_phone</i>
+      </div>
+      <div class="chat-box">
+        <div class="chat-box-header">
+          Chat Box
+          <span class="chat-box-toggle"><i class="material-icons">close</i></span>
+        </div>
+        <div class="chat-box-body">
+          <div class="chat-box-overlay"></div>
+          <div class="chat-logs"></div>
+        </div>
+        <div class="chat-input">
+          <form>
+            <input type="text" id="chat-input" placeholder="Send a message..." autocomplete="off" />
+            <button type="submit" class="chat-submit" id="chat-submit">
+              <i class="material-icons">send</i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

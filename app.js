@@ -24,6 +24,9 @@ app.use(express.static(path.join(__dirname, 'Views')));
 app.get('/', (req, res) => {
   res.render('home', {});
 });
+app.get('/test', (req, res) => {
+  res.render('test', {});
+});
 app.get('/:room', (req, res) => {
   res.render('room', { roomId: req.params.room });
 });
