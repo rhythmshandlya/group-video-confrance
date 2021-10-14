@@ -54,7 +54,7 @@
   max-width: 85vw;
   max-height: 100vh;
   border-radius: 5px;
-  border: 1px solid white;
+  border: 1px solid rgb(173, 162, 162);
 }
 .chat-box-toggle {
   float: right;
@@ -209,29 +209,42 @@
   clear: both;
   margin-bottom: 70px;
 }
-
-nav {
+/*
+  NAVBAR
+*/
+.nav {
   background-color: #5a5eb9;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
 }
-nav h1 {
+
+.nav-logo {
   color: white;
-  padding: 10px;
-  display: inline-block;
+  font-size: 2.5rem;
+  padding: 15px;
   font-family: 'Russo One', sans-serif;
+  width: fit-content;
 }
-#mic-toggle {
-  display: inline-block;
-}
-#mic {
+
+#mic,
+#mic_off,
+#videocam,
+#videocam_off {
   font-size: 30px;
   cursor: pointer;
   color: white;
 }
-#mic_off {
-  font-size: 30px;
+
+#exit_to_app {
+  font-size: 35px;
+  padding-right: 10px;
+  padding-bottom: 3px;
   cursor: pointer;
   color: white;
 }
+
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
@@ -240,4 +253,37 @@ nav h1 {
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently
   supported by Chrome, Edge, Opera and Firefox */
+}
+
+/* popup */
+.popup {
+  height: 300px;
+  width: 300px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid #5865c3;
+  z-index: 3;
+}
+.popup-nav {
+  width: 100%;
+  background-color: #5865c3;
+  padding: 10px;
+}
+
+.decorate-text-1 {
+  color: white;
+  font-family: poppins;
+  font-weight: bold;
+  padding: 0 0 0 95px;
+}
+
+.popup-content {
+  padding-top: 20px;
+  padding-left: 25px;
+}
+td:first-child {
+  color: #5865c3;
+  padding-right: 20px;
 }

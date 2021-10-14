@@ -56,4 +56,13 @@ $(function () {
       $('#mic').attr('id', 'mic');
     }
   });
+  $('.cam').click(() => {
+    if ($('.cam').html() == 'videocam') {
+      $('.cam').text('videocam_off');
+      $('#videocam').attr('id', 'videocam_off');
+    } else {
+      $('.cam').text('videocam');
+      $('#videocam').attr('id', 'videocam');
+    }
+  });
 });
