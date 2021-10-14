@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
   res.render('home', {});
 });
 app.get('/test', (req, res) => {
-  res.render('test', {});
+  res.render('test', { roomId: req.params.room });
 });
 app.get('/:room', (req, res) => {
   res.render('room', { roomId: req.params.room });
@@ -38,6 +38,7 @@ io.on('connection', async (socket) => {
     socket.to(roomId).emit('new-user-connected', userId);
   });
   socket.on('message-send', (roomId, userId, message) => {
+    console.log(roomId, userId);
     socket.to(roomId).emit('deliver-message', message, userId);
   });
   socket.on('disconnecting', () => {
