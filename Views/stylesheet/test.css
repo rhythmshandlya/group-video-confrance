@@ -271,6 +271,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   border: 2px solid #5865c3;
+  background-color: whitesmoke;
   z-index: 3;
 }
 .popup-nav {
@@ -350,4 +351,14 @@ td:first-child {
   padding-left: 10px;
   cursor: pointer;
   color: #5865c3;
+}
+#video-grid {
+  display: flex;
+}
+#video-grid video {
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  height: 240px;
+  width: 300px;
+  padding: 10px;
 }
