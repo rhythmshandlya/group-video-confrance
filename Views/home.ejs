@@ -4,21 +4,30 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Zoom Clone</title>
+    <title>ROOMS</title>
     <link rel="icon" href="../content/logo.png" />
+    <link rel="stylesheet" href="stylesheet/home.css" />
     <script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script>
     <script type="text/javascript" src="script/home.js" defer></script>
   </head>
   <body>
-    <h1>Zoom</h1>
-
-    <button id="create-new-room">Create New Room</button>
-
-    <h2>Or</h2>
-
-    <form>
-      <input type="text" id="join-room-input" placeholder="room-id" />
-      <button id="join-room">Join Room</button>
-    </form>
+    <nav class="navbar">
+      <h1 class="nav-brand">ROOMS</h1>
+    </nav>
+    <div class="content">
+      <h1 class="h1-new">Video Conference with friends on room. Create or join a room now!</h1>
+      <form>
+        <input
+          type="text"
+          id="join-room-input"
+          autocapitalize="false"
+          autocomplete="off"
+          autofocus="true"
+          placeholder="room-id"
+        />
+        <button id="join-room">Join Room</button>
+      </form>
+      <button id="create-new-room">Create New Room</button>
+    </div>
   </body>
 </html>
