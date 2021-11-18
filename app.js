@@ -18,7 +18,7 @@ app.use('/peerjs', peerServer);
 
 //Set template engine to ejs
 app.set('view engine', 'ejs');
-app.use(express.static(path.join(__dirname, 'Views')));
+app.use(express.static(path.join(__dirname, 'views')));
 
 //Front End routes
 app.get('/', (req, res) => {

@@ -4,7 +4,7 @@ const opn = require('opn');
 const server = require('./app');
 
 server.listen(process.env.PORT, () => {
-  console.log(`Listening to port ${process.env.PORT||443}`);
+  console.log(`Listening to port ${process.env.PORT || 443}`);
   opn('http://localhost:3000/test');
 });
 
