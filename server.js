@@ -5,7 +5,7 @@ const server = require('./app');
 
 server.listen(process.env.PORT, () => {
   console.log(`Listening to port ${process.env.PORT}`);
-  opn('http://localhost:3000');
+  opn('http://localhost:3000/test');
 });
 
 process.on('unhandledRejection', (err) => {

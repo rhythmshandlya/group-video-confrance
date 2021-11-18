@@ -35,8 +35,8 @@ io.on('connection', async (socket) => {
     socket.userName = userName;
     socket.to(roomId).emit('new-user-connected', userId, userName);
   });
-  socket.on('message-send', (roomId, userId, message) => {
-    socket.to(roomId).emit('deliver-message', message, userId);
+  socket.on('message-send', (roomId, userId, message, dp) => {
+    socket.to(roomId).emit('deliver-message', message, userId, dp);
   });
   socket.on('dis', (roomId, id, name) => {
     socket.to(roomId).emit('user-disconnected', roomId, id, name);

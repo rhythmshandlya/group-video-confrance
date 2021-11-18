@@ -7,9 +7,17 @@ dps = [
   'https://i.ibb.co/LkR2658/dp2.jpg',
   'https://i.ibb.co/1RydjVB/dp3.jpg',
   'https://i.ibb.co/r28m6vR/dp5.jpg',
-  'https://i.ibb.co/Np7MBJS/dp4.jpg'
+  'https://i.ibb.co/Np7MBJS/dp4.jpg',
+  'https://i.ibb.co/K9z75B7/download.jpg',
+  'https://i.ibb.co/Vqm55ST/images.jpg',
+  'https://i.ibb.co/n0qVwRR/shrek4-disneyscreencaps-com-675-0.jpg',
+  'https://i.ibb.co/ZKFgV3h/images-1.jpg',
+  'https://i.ibb.co/MpfWdq7/images-2.jpg',
+  'https://i.ibb.co/wzh5ndY/evil-kermit-meme.jpg',
+  'https://i.ibb.co/44dMw6T/images-3.jpg'
 ];
 const dp = dps[~~(dps.length * Math.random())];
+
 $(function () {
   //Enter the room exit popup
   $('#enter-name').on('keypress', function (e) {
@@ -39,13 +47,22 @@ $(function () {
       myVideo.setAttribute('id', myId);
       users.set(myId, myName);
       users.set(myName, myId);
+      addItemToList(myName);
       socket.emit('join-room', roomId, myId, myName);
     });
-
     navigator.mediaDevices
       .getUserMedia({
         video: true,
-        audio: true
+        audio: {
+          autoGainControl: false,
+          channelCount: 2,
+          echoCancellation: false,
+          latency: 0,
+          noiseSuppression: false,
+          sampleRate: 48000,
+          sampleSize: 16,
+          volume: 1.0
+        }
       })
       .then((stream) => {
         myStream = stream;
@@ -62,6 +79,7 @@ $(function () {
           const newVideo = document.createElement('video');
           newVideo.setAttribute('id', call.metadata.callerId);
           users.set(call.metadata.callerId, call.metadata.callerName);
+          addItemToList(call.metadata.callerName);
           call.answer(stream);
           call.on('stream', (usersStream) => {
             connectVideoStreamAndAppend(newVideo, usersStream);
@@ -81,18 +99,18 @@ $(function () {
       if (msg.trim() == '') {
         return false;
       }
-      generate_message('You: ' + msg, 'self');
+      generate_message('You: ' + msg, 'self', dp);
       console.log('sending message');
-      socket.emit('message-send', roomId, 10, myName + ': ' + msg);
+      socket.emit('message-send', roomId, 10, myName + ': ' + msg, dp);
     });
-    function generate_message(msg, type) {
+    function generate_message(msg, type, user_dp) {
       // type = 'user' or 'self' of 'room-bot'
       INDEX++;
       let str = '';
       if (type != 'room-bot') {
         str += "<div id='cm-msg-" + INDEX + '\' class="chat-msg ' + type + '">';
         str += '          <span class="msg-avatar">';
-        str += `            <img src=${dp}>`;
+        str += `            <img src=${user_dp}>`;
         str += '          </span>';
         str += '          <div class="cm-msg-text">';
         str += msg;
@@ -114,7 +132,12 @@ $(function () {
       $('.chat-logs')
         .stop()
         .animate({ scrollTop: $('.chat-logs')[0].scrollHeight }, 1000);
-      if (type != 'self') $('#open-chat-btn').css('color', 'maroon');
+      if (type != 'self') {
+        $('#open-chat-btn').addClass('shake');
+      }
+      setTimeout(() => {
+        $('#open-chat-btn').removeClass('shake');
+      }, 500);
     }
     $(document).delegate('.chat-btn', 'click', function () {
       let name = $(this).html();
@@ -158,6 +181,18 @@ $(function () {
       }
       muteUnmuteCam();
     });
+    $('.content_copy').click(function (e) {
+      e.preventDefault();
+      const elem = document.createElement('textarea');
+      elem.value = roomId;
+      document.body.appendChild(elem);
+      elem.select();
+      document.execCommand('copy');
+      document.body.removeChild(elem);
+    });
+    $('.side-nav-btn').click(function () {
+      $('.side-nav').toggleClass('width-zero');
+    });
     /* <---------NAV-BAR---------> */
 
     /* <---------UTILITY---------> */
@@ -168,6 +203,7 @@ $(function () {
       const video = document.createElement('video');
       video.setAttribute('id', new_user_id);
       users.set(new_user_id, user_name);
+      addItemToList(user_name);
       call.on('stream', (usersStream) => {
         connectVideoStreamAndAppend(video, usersStream);
       });
@@ -189,15 +225,26 @@ $(function () {
     function muteUnmuteCam() {
       myStream.getVideoTracks().forEach((track) => (track.enabled = !track.enabled));
     }
+    function addItemToList(name) {
+      $('.members').append(`<li>${name}</li>`);
+    }
 
     /* <---------UTILITY---------> */
-    socket.on('deliver-message', (message, id) => {
-      generate_message(message, 'user');
+    socket.on('deliver-message', (message, id, dp) => {
+      generate_message(message, 'user', dp);
     });
     socket.on('user-disconnected', (roomId, id, name) => {
-      console.log(name);
       document.getElementById(id).remove();
       users.delete(id);
+      const listItems = $('.members li');
+      listItems.each(function (idx, li) {
+        let product = $(li);
+        console.log(product.text());
+        if (product.text() == name) {
+          $('.members li').eq(idx).remove();
+          return;
+        }
+      });
       generate_message(name + ' disconnected!', 'room-bot');
     });
   }
